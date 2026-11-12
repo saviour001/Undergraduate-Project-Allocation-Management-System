@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% block title %}UPAMS — Project Allocation & Management{% endblock %}
+
+{% block public_content %}
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <span class="dot"></span>
+            <span>2025 / 2026 Academic Session · LIVE</span>
+        </div>
+
+        <h1>
+            From <em>chaos</em> to <span class="underline">clarity.</span>
+            Final-year projects, finally <em>organised.</em>
+        </h1>
+
+        <p class="hero-lead">
+            UPAMS digitises every step of the undergraduate project lifecycle at
+            Federal Polytechnic Nasarawa — supervisor allocation, topic approval,
+            chapter-by-chapter review, defence scoring, and printable
+            departmental reports. One platform. Zero paperwork.
+        </p>
+
+        <div class="hero-cta">
+            <a href="{{ url_for('login') }}" class="btn-hero">
+                Access the System <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#workflow" class="btn-hero-ghost">
+                See how it works <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <div class="v">{{ stats.students }}+</div>
+                <div class="l">Students registered</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="v">{{ stats.supervisors }}</div>
+                <div class="l">Active supervisors</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="v">{{ stats.topics }}</div>
+                <div class="l">Project topics</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-art">
+        <div class="hero-seal">
+            {% set logo_size = 320 %}
+            {% include 'partials/logo.html' %}
+        </div>
+
+        <div class="hero-card a">
+            <div class="icon"><i class="fas fa-check"></i></div>
+            <div class="text">
+                <strong>Topic approved</strong>
+                <span>Chapter 2 ready for review</span>
+            </div>
+        </div>
+
+        <div class="hero-card b">
+            <div class="icon"><i class="fas fa-users"></i></div>
+            <div class="text">
+                <strong>4 supervisees</strong>
+                <span>Allocated this session</span>
+            </div>
+        </div>
+
+        <div class="hero-card c">
+            <div class="icon"><i class="fas fa-award"></i></div>
+            <div class="text">
+                <strong>Grade A · 82/100</strong>
+                <span>Defence completed</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== MARQUEE ==================== -->
+<div class="marquee">
+    <div class="marquee-track">
+        <span><i class="dot"></i> Learning</span>
+        <span><i class="dot"></i> Technology</span>
+        <span><i class="dot"></i> Service</span>
+        <span><i class="dot"></i> Excellence in Polytechnic Education</span>
+        <span><i class="dot"></i> Department of Computer Science</span>
+        <span><i class="dot"></i> School of ICT</span>
+        <!-- duplicate for seamless scroll -->
+        <span><i class="dot"></i> Learning</span>
+        <span><i class="dot"></i> Technology</span>
+        <span><i class="dot"></i> Service</span>
+        <span><i class="dot"></i> Excellence in Polytechnic Education</span>
+        <span><i class="dot"></i> Department of Computer Science</span>
+        <span><i class="dot"></i> School of ICT</span>
+    </div>
+</div>
+
+<!-- ==================== FEATURES ==================== -->
+<section class="features" id="features">
+    <div class="section-head">
+        <div class="section-pre">What you get</div>
+        <h2>Built for the way <em>FPN actually works.</em></h2>
+        <p>UPAMS models the real workflow — supervisor allocation, topic gating,
+           chapter corrections, defence scoring — every detail your department
+           already runs on paper, now digital and verifiable.</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature">
+            <div class="feature-icon"><i class="fas fa-people-arrows"></i></div>
+            <h3>Smart Allocation</h3>
+            <p>Auto-distribute students to supervisors using round-robin load-balancing, or assign manually. Reassignment supported with full audit trail.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>Topic Workflow</h3>
+            <p>Students submit topics; supervisors approve or reject with notes. Supervisors can also assign topics directly — both paths supported.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i class="fas fa-file-arrow-up"></i></div>
+            <h3>Chapter Tracking</h3>
+            <p>Versioned uploads for chapters 1–5. Supervisors approve, request corrections, or reject — students see notes immediately and resubmit.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i class="fas fa-award"></i></div>
+            <h3>Defence & Scoring</h3>
+            <p>Schedule defences, capture panel scores out of 100 (presentation + project + chapters), and auto-compute grade letter and final mark.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i class="fas fa-chart-column"></i></div>
+            <h3>Printable Reports</h3>
+            <p>Generate session-wide reports — student progress, supervisor performance, grade distribution. Export to CSV or print directly.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>Audit Trail</h3>
+            <p>Every approval, rejection, allocation, and submission is logged with timestamp, user, and IP. Full accountability built-in.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ROLES ==================== -->
+<section class="roles" id="roles">
+    <div class="roles-inner">
+        <div class="section-head">
+            <div class="section-pre">Three roles, one platform</div>
+            <h2>Designed for everyone in <em>the process.</em></h2>
+            <p>Each user sees only what they need. Permissions are strict.
+               Workflows are guided.</p>
+        </div>
+
+        <div class="role-grid">
+            <div class="role-card a">
+                <div class="role-icon"><i class="fas fa-user-tie"></i></div>
+                <h3>Administrator</h3>
+                <p>Departmental oversight from one console.</p>
+                <ul class="role-feats">
+                    <li><i class="fas fa-circle"></i> Register students &amp; supervisors</li>
+                    <li><i class="fas fa-circle"></i> Allocate supervisors (manual or auto)</li>
+                    <li><i class="fas fa-circle"></i> Manage academic sessions</li>
+                    <li><i class="fas fa-circle"></i> Post department-wide announcements</li>
+                    <li><i class="fas fa-circle"></i> Generate &amp; print reports</li>
+                </ul>
+            </div>
+
+            <div class="role-card b">
+                <div class="role-icon"><i class="fas fa-chalkboard-user"></i></div>
+                <h3>Supervisor</h3>
+                <p>Guide and evaluate, without inbox chaos.</p>
+                <ul class="role-feats">
+                    <li><i class="fas fa-circle"></i> See all allocated supervisees</li>
+                    <li><i class="fas fa-circle"></i> Approve or reject project topics</li>
+                    <li><i class="fas fa-circle"></i> Propose topics for students</li>
+                    <li><i class="fas fa-circle"></i> Review chapter drafts with feedback</li>
+                    <li><i class="fas fa-circle"></i> Schedule &amp; score defences</li>
+                </ul>
+            </div>
+
+            <div class="role-card c">
+                <div class="role-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3>Student</h3>
+                <p>Track your project journey end-to-end.</p>
+                <ul class="role-feats">
+                    <li><i class="fas fa-circle"></i> See assigned supervisor &amp; contact</li>
+                    <li><i class="fas fa-circle"></i> Submit project topic for approval</li>
+                    <li><i class="fas fa-circle"></i> Upload chapters (versioned)</li>
+                    <li><i class="fas fa-circle"></i> Read corrections &amp; resubmit</li>
+                    <li><i class="fas fa-circle"></i> View defence date &amp; final grade</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WORKFLOW ==================== -->
+<section class="workflow" id="workflow">
+    <div class="section-head">
+        <div class="section-pre">The journey</div>
+        <h2>From allocation to <em>graduation</em> — in five stages.</h2>
+        <p>Each stage gates the next, so no student moves forward until their supervisor signs off.</p>
+    </div>
+
+    <div class="workflow-steps">
+        <div class="wstep">
+            <div class="wstep-num">1</div>
+            <h4>Allocation</h4>
+            <p>Admin assigns a supervisor to each student for the active session.</p>
+        </div>
+        <div class="wstep">
+            <div class="wstep-num">2</div>
+            <h4>Topic</h4>
+            <p>Student proposes — or supervisor assigns — and the topic is approved.</p>
+        </div>
+        <div class="wstep">
+            <div class="wstep-num">3</div>
+            <h4>Chapters</h4>
+            <p>Drafts uploaded one by one. Supervisor reviews. Student corrects.</p>
+        </div>
+        <div class="wstep">
+            <div class="wstep-num">4</div>
+            <h4>Defence</h4>
+            <p>Supervisor schedules; panel scores presentation, project, and chapters.</p>
+        </div>
+        <div class="wstep">
+            <div class="wstep-num">5</div>
+            <h4>Result</h4>
+            <p>Final score and letter grade are recorded and reported.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section style="padding: 0 0 6rem;">
+    <div class="cta-band">
+        <div>
+            <h2>Ready to <em>standardise</em> your department's project workflow?</h2>
+            <p>Sign in to begin. Default credentials are provided on the login page.</p>
+        </div>
+        <a href="{{ url_for('login') }}" class="cta-btn">
+            Sign In Now <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}My Profile{% endblock %}
+{% block page_title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <h1>My Profile</h1>
+        <p class="lede">Update your personal information and password.</p>
+    </div>
+</div>
+
+<div class="grid-2">
+    <!-- Profile info -->
+    <form method="post" class="card">
+        <input type="hidden" name="action" value="update_profile">
+        <h3 style="margin-bottom: 1.4rem;">Personal Information</h3>
+        <div class="form-grid">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" value="{{ current_user.username }}" disabled>
+            </div>
+            <div class="field">
+                <label>Role</label>
+                <input type="text" value="{{ current_user.role|title }}" disabled>
+            </div>
+            <div class="field">
+                <label>Title</label>
+                <select name="title">
+                    <option value="">— select —</option>
+                    {% for t in ['Mr','Mrs','Miss','Dr','Prof','Engr'] %}
+                    <option {% if current_user.title == t %}selected{% endif %}>{{ t }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                <label>Full Name <span class="req">*</span></label>
+                <input type="text" name="full_name" value="{{ current_user.full_name }}" required>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ current_user.email or '' }}">
+            </div>
+            <div class="field">
+                <label>Phone</label>
+                <input type="text" name="phone" value="{{ current_user.phone or '' }}">
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Save Profile</button>
+        </div>
+    </form>
+
+    <!-- Change password -->
+    <form method="post" class="card">
+        <input type="hidden" name="action" value="change_password">
+        <h3 style="margin-bottom: 1.4rem;">Change Password</h3>
+        <div class="form-grid">
+            <div class="field">
+                <label>Current Password <span class="req">*</span></label>
+                <input type="password" name="current_password" required>
+            </div>
+            <div class="field">
+                <label>New Password <span class="req">*</span></label>
+                <input type="password" name="new_password" required minlength="6">
+                <div class="hint">Minimum 6 characters.</div>
+            </div>
+            <div class="field">
+                <label>Confirm New Password <span class="req">*</span></label>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-key"></i> Update Password</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

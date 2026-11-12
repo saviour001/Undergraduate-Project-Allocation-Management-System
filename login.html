@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Sign In{% endblock %}
+
+{% block public_content %}
+<div class="auth-shell">
+
+    <div class="auth-art">
+        <div class="auth-art-top">
+            <div class="auth-art-logo">
+                {% set logo_size = 90 %}
+                {% include 'partials/logo.html' %}
+            </div>
+            <h2>Welcome back to <em>UPAMS.</em></h2>
+            <p>The Undergraduate Project Allocation and Management System for The Federal Polytechnic, Nasarawa — Department of Computer Science.</p>
+        </div>
+
+        <div class="auth-art-quote">
+            "Learning, Technology, Service — the same motto that guides this institution
+            guides this platform. Every project, every chapter, every defence — accounted for."
+            <cite>— Department of Computer Science</cite>
+        </div>
+    </div>
+
+    <div class="auth-form-wrap">
+        <form method="post" class="auth-form">
+            <div class="pre">Sign in to continue</div>
+            <h1>Access <em>your</em> dashboard.</h1>
+            <p class="lede">Enter your UPAMS credentials. Your role determines what you see next.</p>
+
+            <div class="form-grid">
+                <div class="field">
+                    <label>Username <span class="req">*</span></label>
+                    <input type="text" name="username" required autofocus autocomplete="username"
+                           placeholder="Username, reg number, or staff ID">
+                </div>
+                <div class="field">
+                    <label>Password <span class="req">*</span></label>
+                    <input type="password" name="password" required autocomplete="current-password"
+                           placeholder="Your password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    Sign In <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="auth-creds">
+                <strong><i class="fas fa-key"></i> Demo Credentials</strong>
+                <div>Admin: <code>admin</code> / <code>admin123</code></div>
+                <div>Supervisor: <code>jmebawondu</code> / <code>super123</code></div>
+                <div>Student: <code>FPN/S05/2024/2025/CS/SW/001</code> / <code>student123</code></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line);">
+                Don't have an account yet?
+                <a href="{{ url_for('register_choice') }}" style="color: var(--burgundy); font-weight: 600;">
+                    Register here <i class="fas fa-arrow-right text-small"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

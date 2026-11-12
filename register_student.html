@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Student Registration{% endblock %}
+
+{% block public_content %}
+<div class="auth-shell" style="min-height: calc(100vh - 80px);">
+  <div class="auth-art">
+    <div class="auth-art-top">
+      <div class="auth-art-logo">
+        {% set logo_size = 90 %}
+        {% include 'partials/logo.html' %}
+      </div>
+      <h2>Student <em>Registration</em></h2>
+      <p>Enter the registration number issued to you by the department. Your details will
+         appear so you can confirm them and set your password.</p>
+    </div>
+    <div class="auth-art-quote">
+      "Only registration numbers loaded by the administrator can register here.
+      This prevents fraudulent accounts and keeps the system trustworthy."
+      <cite>— Department Policy</cite>
+    </div>
+  </div>
+
+  <div class="auth-form-wrap">
+    <div class="auth-form">
+      {% if not lookup %}
+      <!-- ============ STEP 1: Look up reg number ============ -->
+      <div class="pre">Step 1 of 2</div>
+      <h1>Find <em>your</em> record.</h1>
+      <p class="lede">Type the full registration number exactly as it appears on your school ID.</p>
+
+      <form method="post">
+        <div class="form-grid">
+          <div class="field">
+            <label>Registration Number <span class="req">*</span></label>
+            <input type="text" name="registration_number" required autofocus
+                   value="{{ reg_input or '' }}"
+                   placeholder="FPN/S05/2024/2025/CS/SW/001"
+                   style="text-transform: uppercase; font-family: var(--font-mono); font-size: .95rem;">
+            <div class="hint">
+              Format examples:<br>
+              <strong>HND2 Software:</strong> FPN/S05/2024/2025/CS/<strong>SW</strong>/001<br>
+              <strong>HND2 Networking:</strong> FPN/S05/2024/2025/CS/<strong>NC</strong>/001<br>
+              <strong>ND2:</strong> FPN/S05/2024/2025/CS/001
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block">
+            <i class="fas fa-search"></i> Look up my record
+          </button>
+        </div>
+      </form>
+
+      <div style="margin-top: 1.6rem; padding: 1rem; background: var(--cream-2);
+                  border: 1px dashed var(--line-2); border-radius: var(--r); font-size: .88rem;">
+        <strong><i class="fas fa-info-circle"></i> If your record isn't found</strong>
+        <p style="margin: .4rem 0 0;">Contact the Departmental Project Coordinator to verify
+           your data has been uploaded. Only registered final-year students (ND2 / HND2) can use this system.</p>
+      </div>
+
+      {% else %}
+      <!-- ============ STEP 2: Confirm + set password ============ -->
+      <div class="pre">Step 2 of 2</div>
+      <h1>Confirm &amp; <em>activate.</em></h1>
+      <p class="lede">Verify these details are yours, then choose a password.</p>
+
+      <div style="background: var(--cream-2); border-radius: var(--r); padding: 1.2rem; margin-bottom: 1.6rem;">
+        <div class="text-small text-muted" style="margin-bottom: .8rem;">YOUR RECORD</div>
+        <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: .8rem;">
+          {{ lookup.full_name }}
+        </div>
+        <div class="text-small" style="line-height: 1.9;">
+          <div><strong>Reg No:</strong> <code class="text-mono">{{ lookup.registration_number }}</code></div>
+          <div><strong>Level:</strong> {{ lookup.level }}{% if lookup.specialization %} · {{ lookup.specialization }}{% endif %}</div>
+          <div><strong>Department:</strong> {{ lookup.department }}</div>
+          {% if lookup.email %}<div><strong>Email:</strong> {{ lookup.email }}</div>{% endif %}
+          {% if lookup.phone %}<div><strong>Phone:</strong> {{ lookup.phone }}</div>{% endif %}
+          {% if lookup.gender %}<div><strong>Gender:</strong> {{ lookup.gender }}</div>{% endif %}
+        </div>
+      </div>
+
+      <form method="post">
+        <input type="hidden" name="registration_number" value="{{ lookup.registration_number }}">
+        <div class="form-grid">
+          <div class="field">
+            <label>Choose a Password <span class="req">*</span></label>
+            <input type="password" name="password" required minlength="6" autofocus
+                   placeholder="At least 6 characters">
+            <div class="hint">Pick something memorable. You will use this every time you sign in.</div>
+          </div>
+          <div class="field">
+            <label>Confirm Password <span class="req">*</span></label>
+            <input type="password" name="password_confirm" required minlength="6">
+          </div>
+          <button class="btn btn-primary btn-lg btn-block">
+            <i class="fas fa-check-circle"></i> Activate my account
+          </button>
+        </div>
+      </form>
+
+      <div style="text-align: center; margin-top: 1rem;">
+        <a href="{{ url_for('register_student') }}" class="text-small">
+          <i class="fas fa-arrow-left"></i> That isn't me — search a different number
+        </a>
+      </div>
+
+      {% endif %}
+
+      <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line);">
+        Already registered?
+        <a href="{{ url_for('login') }}" style="color: var(--burgundy); font-weight: 600;">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

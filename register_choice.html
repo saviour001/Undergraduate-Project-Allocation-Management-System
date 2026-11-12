@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block public_content %}
+<div style="min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem;">
+  <div style="max-width: 900px; width: 100%;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <div class="section-pre">Get started</div>
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin: .6rem 0 1rem;">
+        Create your <em style="color: var(--burgundy); font-style: italic;">UPAMS</em> account
+      </h1>
+      <p class="lede text-muted">
+        Choose your role. You will need your <strong>registration number</strong> (students) or
+        <strong>staff ID</strong> (supervisors) that the department has already loaded into the system.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+      <a href="{{ url_for('register_student') }}" class="card" style="text-decoration: none; color: inherit; transition: all .2s;
+              padding: 2.5rem; text-align: center; border: 1px solid var(--line);">
+        <div class="feature-icon" style="margin: 0 auto 1.4rem; width: 72px; height: 72px; font-size: 1.6rem;">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <h2 style="margin-bottom: .6rem;">I am a Student</h2>
+        <p class="text-muted">ND2 or HND2 Computer Science. Register with your school registration number.</p>
+        <div style="margin-top: 1.4rem;">
+          <span class="btn btn-primary"><i class="fas fa-arrow-right"></i> Continue as Student</span>
+        </div>
+      </a>
+
+      <a href="{{ url_for('register_supervisor') }}" class="card" style="text-decoration: none; color: inherit; transition: all .2s;
+              padding: 2.5rem; text-align: center; border: 1px solid var(--line);">
+        <div class="feature-icon" style="margin: 0 auto 1.4rem; width: 72px; height: 72px; font-size: 1.6rem;
+                background: var(--cream-2); color: var(--forest);">
+          <i class="fas fa-chalkboard-user"></i>
+        </div>
+        <h2 style="margin-bottom: .6rem;">I am a Supervisor</h2>
+        <p class="text-muted">Departmental staff. Register with your staff ID.</p>
+        <div style="margin-top: 1.4rem;">
+          <span class="btn btn-secondary"><i class="fas fa-arrow-right"></i> Continue as Supervisor</span>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line);">
+      Already have an account?
+      <a href="{{ url_for('login') }}" style="color: var(--burgundy); font-weight: 600;">Sign in here</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

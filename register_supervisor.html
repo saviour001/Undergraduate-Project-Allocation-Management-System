@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Supervisor Registration{% endblock %}
+
+{% block public_content %}
+<div class="auth-shell" style="min-height: calc(100vh - 80px);">
+  <div class="auth-art">
+    <div class="auth-art-top">
+      <div class="auth-art-logo">
+        {% set logo_size = 90 %}
+        {% include 'partials/logo.html' %}
+      </div>
+      <h2>Supervisor <em>Registration</em></h2>
+      <p>Enter your departmental staff ID. Your details will appear so you can confirm
+         them and set your password.</p>
+    </div>
+    <div class="auth-art-quote">
+      "Only staff IDs loaded by the administrator can register here. The department
+      maintains a controlled list of authorised supervisors."
+      <cite>— Department Policy</cite>
+    </div>
+  </div>
+
+  <div class="auth-form-wrap">
+    <div class="auth-form">
+      {% if not lookup %}
+      <div class="pre">Step 1 of 2</div>
+      <h1>Find <em>your</em> staff record.</h1>
+      <p class="lede">Type your staff ID as supplied by the department.</p>
+
+      <form method="post">
+        <div class="form-grid">
+          <div class="field">
+            <label>Staff ID <span class="req">*</span></label>
+            <input type="text" name="staff_id" required autofocus
+                   value="{{ sid_input or '' }}"
+                   placeholder="FPN/STF/CS/001"
+                   style="text-transform: uppercase; font-family: var(--font-mono); font-size: .95rem;">
+            <div class="hint">Format: <code>FPN/STF/&lt;DEPT&gt;/&lt;NNN&gt;</code></div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block">
+            <i class="fas fa-search"></i> Look up my record
+          </button>
+        </div>
+      </form>
+
+      <div style="margin-top: 1.6rem; padding: 1rem; background: var(--cream-2);
+                  border: 1px dashed var(--line-2); border-radius: var(--r); font-size: .88rem;">
+        <strong><i class="fas fa-info-circle"></i> Staff ID not found?</strong>
+        <p style="margin: .4rem 0 0;">Contact the system administrator to confirm your
+           staff record has been added.</p>
+      </div>
+
+      {% else %}
+      <div class="pre">Step 2 of 2</div>
+      <h1>Confirm &amp; <em>activate.</em></h1>
+      <p class="lede">Verify these are your details, then set your password.</p>
+
+      <div style="background: var(--cream-2); border-radius: var(--r); padding: 1.2rem; margin-bottom: 1.6rem;">
+        <div class="text-small text-muted" style="margin-bottom: .8rem;">YOUR STAFF RECORD</div>
+        <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: .8rem;">
+          {{ lookup.title }} {{ lookup.full_name }}
+        </div>
+        <div class="text-small" style="line-height: 1.9;">
+          <div><strong>Staff ID:</strong> <code class="text-mono">{{ lookup.staff_id }}</code></div>
+          <div><strong>Department:</strong> {{ lookup.department }}</div>
+          {% if lookup.email %}<div><strong>Email:</strong> {{ lookup.email }}</div>{% endif %}
+          {% if lookup.phone %}<div><strong>Phone:</strong> {{ lookup.phone }}</div>{% endif %}
+          {% if lookup.gender %}<div><strong>Gender:</strong> {{ lookup.gender }}</div>{% endif %}
+        </div>
+      </div>
+
+      <form method="post">
+        <input type="hidden" name="staff_id" value="{{ lookup.staff_id }}">
+        <div class="form-grid">
+          <div class="field">
+            <label>Choose a Password <span class="req">*</span></label>
+            <input type="password" name="password" required minlength="6" autofocus
+                   placeholder="At least 6 characters">
+          </div>
+          <div class="field">
+            <label>Confirm Password <span class="req">*</span></label>
+            <input type="password" name="password_confirm" required minlength="6">
+          </div>
+          <button class="btn btn-primary btn-lg btn-block">
+            <i class="fas fa-check-circle"></i> Activate my account
+          </button>
+        </div>
+      </form>
+
+      <div style="text-align: center; margin-top: 1rem;">
+        <a href="{{ url_for('register_supervisor') }}" class="text-small">
+          <i class="fas fa-arrow-left"></i> That isn't me — search a different ID
+        </a>
+      </div>
+      {% endif %}
+
+      <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line);">
+        Already registered?
+        <a href="{{ url_for('login') }}" style="color: var(--burgundy); font-weight: 600;">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

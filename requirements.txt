@@ -1,0 +1,19 @@
+# UPAMS - Undergraduate Project Allocation and Management System
+# Python 3.7+ Requirements
+# Install with: pip install -r requirements.txt
+
+# Core web framework
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# Optional but recommended for production
+python-dotenv==1.0.0
+
+# Note: The following are part of Python standard library and don't need to be installed:
+# - sqlite3 (database)
+# - csv (CSV parsing)
+# - os (file/directory operations)
+# - io (file-like objects)
+# - uuid (unique identifiers)
+# - datetime (date/time handling)
+# - functools (function utilities)

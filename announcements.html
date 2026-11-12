@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Announcements{% endblock %}
+{% block page_title %}Announcements{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <h1>Departmental Announcements</h1>
+        <p class="lede">Latest announcements from the administration.</p>
+    </div>
+</div>
+
+<div class="card">
+    {% if items %}
+    {% for a in items %}
+    <div style="padding: 1.4rem 0; border-bottom: 1px solid var(--line);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+            <h3 style="margin: 0; font-size: 1.15rem;">{{ a.title }}</h3>
+            <span class="badge">{{ a.audience|title }}</span>
+        </div>
+        <p style="margin: .6rem 0;">{{ a.body }}</p>
+        <div class="text-small text-muted">
+            <i class="fas fa-user"></i> {{ a.full_name or 'Department' }} ·
+            <i class="fas fa-clock"></i> {{ a.created_at }}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="empty">
+        <div class="empty-icon"><i class="fas fa-bullhorn"></i></div>
+        <h3>No announcements yet</h3>
+        <p>Check back later for updates from the department.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
